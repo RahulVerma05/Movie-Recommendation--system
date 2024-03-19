@@ -1,7 +1,13 @@
 import pandas as pd
 import numpy as np
+import ast
+import pickle
 
-df_1 = pd.read_csv("tmdb_5000_credits.csv")
-df_2 = pd.read_csv("tmdb_5000_movies.csv")
+credits = pd.read_csv("tmdb_5000_credits.csv")
+movie = pd.read_csv("tmdb_5000_movies.csv")
 
-print(df_2)
+movie.head(2)
+credits.head(2)
+
+movies = movie.merge(credits, on='title')
+movies.head()
