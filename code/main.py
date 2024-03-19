@@ -10,4 +10,5 @@ movie.head(2)
 credits.head(2)
 
 movies = movie.merge(credits, on='title')
-movies.head()
+print(movies.head())
+
