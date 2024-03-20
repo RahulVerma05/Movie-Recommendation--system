@@ -10,5 +10,10 @@ movie.head(2)
 credits.head(2)
 
 movies = movie.merge(credits, on='title')
-print(movies.head())
+movies.dropna(inplace=True)
 
+def convert(text):
+    L = []
+    for i in ast.literal_eval(text):
+        L.append(i['name'])
+    return
