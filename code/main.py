@@ -23,3 +23,11 @@ movies.head()
 
 movies['keywords'] = movies['keywords'].apply(convert)
 movies.head()
+
+movies.columns
+
+movies['overview'] = movies['overview'].apply(lambda x:x.split())
+movies.head()
+
+movies['cast'] = movies['cast'].apply(lambda x:x[0:3])
+movies.head()
