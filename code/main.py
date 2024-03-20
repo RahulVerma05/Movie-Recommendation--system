@@ -20,3 +20,6 @@ def convert(text):
 
 movies['genres'] = movies['genres'].apply(convert)
 movies.head()
+
+movies['keywords'] = movies['keywords'].apply(convert)
+movies.head()
