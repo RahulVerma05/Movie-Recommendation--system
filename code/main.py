@@ -16,4 +16,7 @@ def convert(text):
     L = []
     for i in ast.literal_eval(text):
         L.append(i['name'])
-    return
+    return L
+
+movies['genres'] = movies['genres'].apply(convert)
+movies.head()
