@@ -31,3 +31,13 @@ movies.head()
 
 movies['cast'] = movies['cast'].apply(lambda x:x[0:3])
 movies.head()
+
+def fetch_director(text):
+    L = []
+    for i in ast.literal_eval(text):
+        if i['job'] == 'Director':
+            L.append(i['name'])
+    return L
+
+movies['crew'] = movies['crew'].apply(fetch_director)
+movies.head()
