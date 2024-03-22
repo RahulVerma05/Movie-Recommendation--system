@@ -64,3 +64,28 @@ movies['genres'] = movies['genres'].apply(space)
 
 movies['tages'] = movies['overview'] + movies['genres'] + movies['keywords'] + movies['cast'] + movies['crew']
 movies_df = movies[['movie_id','title','tages']]
+
+movies_df['tages'] = movies_df['tages'].apply(lambda x: " ".join(x))
+movies_df['tages'] = movies_df['tages'].apply(lambda x: x.lower())
+
+print(movies_df.head())
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+tf_vectoriztion = TfidfVectorizer(stop_words='english')
+tf_matrix = tf_vectoriztion.fit_transform(movies_df['tages'].values.astype('U'))
+
+cosin_sim = cosine_similarity(tf_matrix,tf_matrix)
+
+def get_recommand(title, cosin_sim = cosin_sim):
+    idx = movies_df[movies_df['title'] == title].index[0]
+    sim_score = list(enumerate(cosin_sim[idx]))
+    sim_score = sorted(sim_score, key=lambda x: x[1], reverse= True)
+    sim_score = sim_score[1:11]
+    movie_indicate = [i[0] for i in sim_score]
+    return movies_df['title'].iloc[movie_indicate]
+
+film = 'Avatar'
+print('film recommended ')
+print(get_recommand(film))
