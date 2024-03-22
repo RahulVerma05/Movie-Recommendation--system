@@ -60,4 +60,7 @@ def space(L):
 movies['cast'] = movies['cast'].apply(space)
 movies['crew'] = movies['crew'].apply(space)
 movies['keywords'] = movies['keywords'].apply(space)
-movies['overview'] = movies['overview'].apply(space)
+movies['genres'] = movies['genres'].apply(space)
+
+movies['tages'] = movies['overview'] + movies['genres'] + movies['keywords'] + movies['cast'] + movies['crew']
+movies_df = movies[['movie_id','title','tages']]
