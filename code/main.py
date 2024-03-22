@@ -50,3 +50,14 @@ def reduce_cast(text):
     return L
 
 movies['cast'] = movies['cast'].apply(reduce_cast)
+
+def space(L):
+    L1 = []
+    for i in L:
+        L1.append(i.replace(" ",""))
+    return L1
+
+movies['cast'] = movies['cast'].apply(space)
+movies['crew'] = movies['crew'].apply(space)
+movies['keywords'] = movies['keywords'].apply(space)
+movies['overview'] = movies['overview'].apply(space)
