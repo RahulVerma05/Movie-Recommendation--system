@@ -10,8 +10,10 @@ movie.head(2)
 credits.head(2)
 
 movies = movie.merge(credits, on='title')
+movies.isnull().sum()
 movies.dropna(inplace=True)
 
+movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
 def convert(text):
     L = []
     for i in ast.literal_eval(text):
@@ -24,13 +26,9 @@ movies.head()
 movies['keywords'] = movies['keywords'].apply(convert)
 movies.head()
 
-movies.columns
-
 movies['overview'] = movies['overview'].apply(lambda x:x.split())
 movies.head()
 
-movies['cast'] = movies['cast'].apply(lambda x:x[0:3])
-movies.head()
 
 def fetch_director(text):
     L = []
@@ -41,3 +39,14 @@ def fetch_director(text):
 
 movies['crew'] = movies['crew'].apply(fetch_director)
 movies.head()
+
+def reduce_cast(text):
+    L =[]
+    c = 0
+    for i in ast.literal_eval(text):
+        if c < 4:
+            L.append(i['name'])
+            c += 1
+    return L
+
+movies['cast'] = movies['cast'].apply(reduce_cast)
