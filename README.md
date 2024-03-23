@@ -11,3 +11,5 @@
 8. new column contain values of all column expect title and movie id
 9. now import install scikit-learn and sklearn to created a required model
 10. finally we got recommended movie on the basis of the cosin score or similarty score 
+
+All the comments are done
